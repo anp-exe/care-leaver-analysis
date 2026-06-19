@@ -1,85 +1,90 @@
-# Care Leavers and Higher Education, Analysis README
+# Care Leavers and Higher Education: Analysis
 
-A data journalism project in the spirit of *1 in 9*. The thesis: the data on care leavers in UK higher education is fragmented, suppressed, self-declared, and contradictory — and **that fragmentation is the story.** Where FIDE handed over 47M clean chess records, the care system gives gaps, four-nation definitional chaos, and headline stats that change depending on who you ask (6% vs 13% vs 14% HE progression).
+A data-journalism analysis of how care leavers progress to UK higher education: who gets in, who reaches the most selective universities, and the gap that widens at the top.
 
-## The human anchor
+By age 19, **13%** of care leavers have reached any form of higher education, against **46%** of all other pupils. At high-tariff universities, the most selective in the country, that figure collapses to **2%**. This notebook builds the evidence base behind that finding and produces the figures used in the accompanying data story.
 
-The piece is anchored by a real story: a friend who is a care leaver founded **Oxford Class Act**, a University of Oxford society for students from underrepresented backgrounds. They held a care-leaver meet-up. **Two people showed up.** That single image carries the whole project — every percentage in this analysis is really about how few people are in that room.
+> 🔗 **Read the published piece:** [the data story site]([https://anp-exe.github.io/care-leaver-analysis](https://anp-exe.github.io/care-leaver-analysis-he/)) 
 
-## Central angle
+---
 
-**The number nobody agrees on** — a methodological piece interrogating why the headline figure for care-leaver university access changes depending on the source (6% SSDA903 vs 13% DfE digest vs 14%), and what that says about how seriously the system counts these young people.
+## What this analyses
 
-## The core questions
+The notebook works through twelve questions about care-experienced young people and higher education, moving from the headline gap to the human picture behind it:
 
-### Q1 — The HE participation funnel
-How many care leavers start, progress, and enter higher education, broken down by nation (England, Scotland, Wales, NI). The headline funnel.
+1. **The progression gap** — care leavers vs all other pupils, for any HE and for high-tariff HE.
+2. **A second disadvantaged cohort** — pupils looked after 12+ months, shown to track care leavers closely.
+3. **Change over time** — a decade of progression rates, showing the gap holding even as both rise.
+4. **Applicant age** — care-experienced applicants apply older and less often at the standard age of 18.
+5. **Applicant volume** — growth in care-experienced applicants, 2018–2022.
+6. **Qualification routes** — the over-representation of Access to HE, BTEC, and "Other" routes.
+7. **A-level attainment** — a more polarised, U-shaped distribution among care-experienced applicants.
+8. **POLAR4 participation** — over-representation in the lowest-participation neighbourhoods.
+9. **Duration of care** — most applicants spent 3+ years in care.
+10. **Subject choice** — the lean toward nursing, health and social care, and away from business and economics.
+11. **What applicants look forward to** — aspiration is not the missing ingredient.
+12. **What applicants worry about** — finances and wellbeing far ahead of academic concerns.
 
-### Q2 — The geography of opportunity
-Local-authority-level mapping of care-leaver HE entry rates. Postcode-lottery framing. Visual centrepiece.
+---
 
-### Q3 — Subject-level gaps
-What care leavers study versus the general student population, and where the gaps cluster.
+## Data sources
 
-### Q4 — Retention and completion
-Getting in versus getting through. Entry is not the same as a degree.
+| Source | Used for |
+| --- | --- |
+| **DfE — Widening Participation in Higher Education** | Progression to HE by age 19, split by care status and institution tariff |
+| **UCAS — care-experienced applicant statistics** | Applicant age, qualification route, POLAR4, subject choice, duration of care, and survey responses |
 
-### Q5 — Promises versus outcomes
-Universities' Access and Participation Plan (APP) pledges against the actual care-leaver numbers they record.
+All figures come from publicly available government and UCAS releases. The analysis combines and reshapes them; the underlying data is not redistributed in this repository.
 
-### Q6 — Distance from home (NEW)
-How far care-experienced children are placed from where they originated. SSDA903 records placement distance and out-of-authority placements, so "placed 20+ miles away" is directly pullable; a 100+ mile cut can often be derived.
-**Status: gettable.** Pull from DfE SSDA903 placement data.
+> [!NOTE]
+>  **Note for anyone re-running this:** the raw source files are not committed to the repo (they're large and publicly available at source). Download them from the DfE and UCAS releases above and place them in `notebooks/data/` to reproduce.
 
-### Q7 — Placement stability during the exam years (NEW)
-Placement instability across the GCSE / A-level years (ages 15–18), using the published "three or more placement moves in a year" indicator.
-**Status: gettable if reframed.** Note: data on moves timed *specifically to exam weeks* is NOT published — reframe as instability across the exam-age window, which the data supports. Do not claim exam-week precision.
+---
 
-### Q8 — Graduate salary by subject studied (NEW)
-For the subjects care leavers cluster into (from Q3), the typical graduate earnings using the LEO (Longitudinal Education Outcomes) dataset.
-**Status: gettable with a hard caveat.** LEO does NOT publicly break earnings down by care-leaver status (cells too small, suppressed). Honest framing: "care leavers cluster in subjects X and Y; typical graduate earnings for those subjects are Z" — NEVER "care leavers earn Z."
+## Methods
 
-## Nested deep-dive: care leavers in the Russell Group
+*(This section describes the approach — please verify the specific library and version details against your actual notebook before publishing.)*
 
-This sits inside Q1 (funnel) and Q5 (promises vs outcomes). Derived three ways and triangulated — the methods are not averaged, the spread is the finding.
+- **Language:** Python
+- **Core libraries:** `pandas` for data wrangling, `matplotlib` for all figures
+- **Workflow:** each question is a self-contained section — load and clean the relevant slice, reshape, then plot
+- **Design choices:** a consistent green/mauve palette is used across every chart so the same colour carries the same meaning throughout the set; figures are exported as PNGs for use in the companion site
 
-### The two questions (never conflate)
-- **Q_A** — % of care leavers who reach a Russell Group uni (denominator = all care leavers). ~1–2%.
-- **Q_B** — % of Russell Group students who are care leavers (denominator = all RG students). ~0.4%.
+### A note on definitions
+The DfE and UCAS define "care-experienced" slightly differently, so the two datasets are treated as **complementary rather than identical** — the analysis does not merge them into a single population. Cross-year comparisons are affected by KS5 reform and pandemic disruption (per DfE guidance), and survey responses capture stated intent rather than outcome. These caveats are carried through to the published piece.
 
-### The three methods
-1. **Method 1 — DfE widening participation (tariff proxy).** Answers Q_A. "High tariff" as a proxy for RG. Benchmark ~1.8%.
-2. **Method 2 — OfS bottom-up (exact UKPRN match).** Answers Q_A and Q_B. Sums care-experienced entrants across the exact 24 RG providers. Rigorous, but a **floor not a true count.**
-3. **Method 3 — flipped national-rate cross-check.** Answers Q_B against the published ~0.4% sector figure.
+---
 
-### Primary data source for the RG deep-dive
-Office for Students (OfS) Access and Participation data dashboard, 2025 release — access lifecycle stage. Open Government Licence v3. Last updated February 2026.
+## Repository structure
 
-## Data sources by question
+```
+notebooks/
+├── <analysis-notebook>.ipynb     # the analysis (update with real filename)
+└── data/                         # source data — not tracked in git
+charts/                           # exported figures (PNG)
+```
+*(Update this tree to match your actual layout.)*
 
-- **Q1, Q6, Q7:** DfE SSDA903 "Children Looked After in England" (Explore Education Statistics)
-- **Q1 (devolved):** Scotland Children's Social Work Statistics, StatsWales, NI DoH
-- **Q1, Q2, Q5, RG:** DfE Widening Participation; OfS Access & Participation dashboard
-- **Q3, Q8:** HESA subject data; LEO (Longitudinal Education Outcomes)
-- **Q4:** OfS continuation/completion indicators
-- **Context:** House of Commons Library briefing CBP-8429; Rees Centre; Become / NNECL
+---
 
-## Caveats baked into every result
+## How to run
 
-- **Suppression.** OfS rounds and suppresses small cells. Care-leaver counts at individual RG providers are frequently suppressed, pushing Method 2 below the true number. This is itself a finding.
-- **Self-declaration.** The care-experience flag is self-reported; many eligible students never tick it. Downward pressure on every count.
-- **No earnings-by-care-status.** LEO cannot be sliced by care-leaver status publicly (Q8). State subject-level earnings, not care-leaver earnings.
-- **No exam-week placement data.** Q7 reframed to the exam-age window, not literal exam timing.
-- **Four-nation definitions differ.** "Looked after" means different things across the UK; do not stack numbers across nations.
-- **The 22–25 cohort is undercounted.**
-- **RG definition.** Exact match on 24 UKPRNs, not a tariff proxy. The notebook's match-failure report must come back clean before any total is trusted.
+```bash
+# clone the repo
+git clone https://github.com/anp-exe/care-leaver-analysis.git
+cd care-leaver-analysis
 
-## Headline framing rule
+# install dependencies
+pip install pandas matplotlib jupyter        # add any others your notebook uses
 
-Always report as "one of the small percentage of care leavers to reach a Russell Group university" — never a hard single percent. The precise figure is not cleanly published and is challengeable.
+# add the source data files to notebooks/data/ (see Data sources above)
 
-## Files
+# launch
+jupyter notebook
+```
 
-- `care_leavers_russell_group.ipynb` — the RG triangulation notebook (auto-downloads OfS data)
-- `data/rg_ukprn_lookup.csv` — the 24 Russell Group providers + UKPRNs (generated)
-- `data/rg_care_by_provider.png` — per-provider chart (generated)
+
+## Author
+
+**Anna** — AI & Philosophy, King's College London
+[Portfolio](https://anp-exe.github.io/portfolio) · [LinkedIn](https://linkedin.com/in/annaparker2005) · [GitHub](https://github.com/anp-exe)
