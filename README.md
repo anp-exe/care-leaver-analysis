@@ -4,7 +4,7 @@ A data-journalism analysis of how care leavers progress to UK higher education: 
 
 By age 19, **13%** of care leavers have reached any form of higher education, against **46%** of all other pupils. At high-tariff universities, the most selective in the country, that figure collapses to **2%**. This notebook builds the evidence base behind that finding and produces the figures used in the accompanying data story.
 
-> 🔗 **Read the published piece:** [the data story site]([https://anp-exe.github.io/care-leaver-analysis](https://anp-exe.github.io/care-leaver-analysis-he/)) 
+> 🔗 **Read the published piece:** [the data story site](https://anp-exe.github.io/care-leaver-analysis-he/)
 
 ---
 
