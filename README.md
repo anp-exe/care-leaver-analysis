@@ -82,9 +82,3 @@ pip install pandas matplotlib jupyter        # add any others your notebook uses
 # launch
 jupyter notebook
 ```
-
-
-## Author
-
-**Anna** — AI & Philosophy, King's College London
-[Portfolio](https://anp-exe.github.io/portfolio) · [LinkedIn](https://linkedin.com/in/annaparker2005) · [GitHub](https://github.com/anp-exe)
